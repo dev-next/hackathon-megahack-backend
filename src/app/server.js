@@ -10,7 +10,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 // ANOTHER DEPENDECIES
 const Logger = require('./utils/Logger');
-const mongo = require('./infrastructure/mongodb-models/index')();
+const mongo = require('./domain/infrastructure/mongodb-models/index')();
 const TokenService = require('./domain/services/TokenService');
 
 const app = express();

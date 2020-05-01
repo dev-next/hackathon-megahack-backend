@@ -1,6 +1,6 @@
 const internalDependencies = {
   jwt: require('jsonwebtoken'),
-  UserRepository: require('../../infrastructure/repository/UserRepository'),
+  UserRepository: require('../infrastructure/repository/UserRepository'),
   CreatePassword: require('../../utils/CreatePassword'),
   Logger: require('../../utils/Logger'),
 };

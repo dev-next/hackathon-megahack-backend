@@ -1,5 +1,5 @@
 const dependencies = {
-  UsersRepository: require('../../../../infrastructure/repository/UserRepository'),
+  UsersRepository: require('../../../infrastructure/repository/UserRepository'),
 };
 
 const FindUsers = (data, injection) => {

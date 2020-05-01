@@ -1,5 +1,5 @@
 const dependencies = {
-  UserRepository: require('../../../../infrastructure/repository/UserRepository'),
+  UserRepository: require('../../../infrastructure/repository/UserRepository'),
   CreatePassword: require('../../../../utils/CreatePassword'),
 };
 
