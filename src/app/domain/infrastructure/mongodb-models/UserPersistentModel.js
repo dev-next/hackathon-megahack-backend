@@ -7,7 +7,7 @@ function GenerateUsersMongoSchema(injection) {
     name: { type: String, required: true },
     email: {
       type: String,
-      required: true,
+      required: false,
       lowercase: true,
       index: { unique: true },
     },
@@ -16,13 +16,12 @@ function GenerateUsersMongoSchema(injection) {
     type: {
       type: String,
       uppercase: true,
-      default: 'GUEST',
-      enum: ['CUSTOMER', 'SYSADMIN', 'GUEST'],
+      default: 'CUSTOMER',
+      enum: ['CUSTOMER', 'STORE_OWNER', 'SELLER'],
     },
-    creationDate: { type: Date, default: Date.now },
-    updateDate: Date,
+    stores: [String],
     active: { type: Boolean, default: true },
-  });
+  }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
   return connection.model('users', userMongoSchema);
 }
 
