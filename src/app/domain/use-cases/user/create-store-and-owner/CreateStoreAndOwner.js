@@ -3,7 +3,7 @@ const dependencies = {
   CreatePassword: require('../../../../utils/CreatePassword'),
 };
 
-const CreateStoreOwner = (data, injection) => {
+const CreateStoreAndOwner = (data, injection) => {
   const {
     UserRepository,
     CreatePassword,
@@ -19,4 +19,4 @@ const CreateStoreOwner = (data, injection) => {
   return new UserRepository(injection).createUser(newUser);
 };
 
-module.exports = CreateStoreOwner;
+module.exports = CreateStoreAndOwner;
