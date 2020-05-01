@@ -11,6 +11,7 @@ function MappingObjects(injection) {
   if (!mappingObjects) {
     mappingObjects = {
       UserPersistentModel: require('./UserPersistentModel')({ connection: conn, Schema }),
+      StorePersistentModel: require('./StorePersistentModel')({ connection: conn, Schema }),
     }
   }
   return mappingObjects;
