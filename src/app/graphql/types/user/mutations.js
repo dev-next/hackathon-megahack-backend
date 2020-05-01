@@ -4,18 +4,16 @@ const CreateUser = require('../../../domain/use-cases/user/create-user/CreateUse
 const typeDefs = gql`
   extend type Mutation {
   """Mutation to create a User"""
-    addUser(
-      name: String!
-      email: String!
-      password: String!
-      phone: String
+    createStoreOwner(
+      user: UserInput!
+      store: StoreInput
     ): User
   }
 `;
 
 const resolvers = {
   Mutation: {
-    addUser:  (
+    createStoreOwner:  (
       root,
       data,
       {
