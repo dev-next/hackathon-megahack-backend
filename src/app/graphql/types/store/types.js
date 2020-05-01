@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Store {
+    id: ID
     name: String
     corporateName: String
     documentNumber: String
@@ -30,7 +31,12 @@ const typeDefs = gql`
   }
 `;
 
-const resolvers = {};
+const resolvers = {
+  Store: {
+    // APPROACH TO TRANSFORM POSSIBLE _id RECEIVED FROM MONGODB DATABASE
+    id: root => root._id || root.id,
+  },
+};
 
 module.exports = {
   typeDefs,
