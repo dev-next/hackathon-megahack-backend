@@ -1,5 +1,5 @@
 const { gql, UserInputError } = require('apollo-server-express');
-const CreateUser = require('../../../domain/use-cases/user/create-user/CreateUser');
+const CreateStoreOwner = require('../../../domain/use-cases/user/create-user/CreateStoreOwner');
 
 const typeDefs = gql`
   extend type Mutation {
@@ -26,7 +26,7 @@ const resolvers = {
           invalidArgs: data.name === '' ? ['name'] : ['email'],
         });
       }
-      return CreateUser(data, { UserPersistentModel, Logger });
+      return CreateStoreOwner(data, { UserPersistentModel, Logger });
     },
   },
 };
