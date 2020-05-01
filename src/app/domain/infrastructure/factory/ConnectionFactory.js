@@ -4,7 +4,7 @@ let singleConnection = null;
 
 const connectionConfig = {
   dev: {
-    URI: 'mongodb://127.0.0.1:27017/my-db',
+    URI: 'mongodb://127.0.0.1:27017/peralta-db',
     options: {
       poolSize: 5,
       autoIndex: true,
