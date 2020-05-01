@@ -4,6 +4,8 @@ const { gql } = require('apollo-server-express');
 
 const { userTypeDefs, userResolvers } = require('./types/user/');
 const { signTypeDefs, signResolvers } = require('./types/sign/');
+const { storeTypeDefs, storeResolvers } = require('./types/store/');
+const { commonTypeDefs, commonResolvers } = require('./types/common/');
 
 // DEFAULT EMPTY ROOT TYPES
 const RootTypes = gql`
@@ -17,8 +19,20 @@ const RootTypes = gql`
 
 const rootTypeDefs = [RootTypes];
 
-const typeDefs = flatten([rootTypeDefs, userTypeDefs, signTypeDefs]);
-const resolvers = merge({}, userResolvers, signResolvers);
+const typeDefs = flatten([
+  rootTypeDefs,
+  userTypeDefs,
+  signTypeDefs,
+  storeTypeDefs,
+  commonTypeDefs,
+]);
+const resolvers = merge(
+  {},
+  userResolvers,
+  signResolvers,
+  storeResolvers,
+  commonResolvers,
+);
 
 module.exports = makeExecutableSchema({
   typeDefs,
