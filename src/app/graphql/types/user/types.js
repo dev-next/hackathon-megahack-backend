@@ -2,17 +2,30 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   enum _UserType {
-    GUEST
     CUSTOMER
-    SYSADMIN
+    STORE_OWNER
+    SELLER
   }
+
   """Object Type that represents a User"""
   type User {
     id: ID!
-    name: String!
-    email: String!
+    name: String
+    email: String
+    password: String
     phone: String
-    type: _UserType!
+    stores: [Store]
+    active: Boolean
+    creationDate: DateTime
+    updateDate: DateTime
+  }
+
+  input UserInput {
+    name: String!
+    email: String
+    password: String!
+    phone: String
+    stores: [StoreInput]
   }
 `;
 
