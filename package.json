@@ -1,7 +1,7 @@
 {
-  "name": "presente-palavras-api",
+  "name": "peralta-api",
   "version": "1.0.0",
-  "description": "API GraphQL from https://www.presenteempalavras.com.br/",
+  "description": "API GraphQL from http://peralta.dev-next.com",
   "main": "server.js",
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
@@ -36,20 +36,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Turbiani/presente-palavras-api.git"
+    "url": "git+https://github.com/dev-next/hackathon-megahack-backend.git"
   },
   "keywords": [
     "graphql",
-    "presente",
-    "palavras",
-    "casamento",
-    "votos",
-    "javascript"
+    "hackathon",
+    "megahack",
+    "mega",
+    "hack",
+    "javascript",
+    "node"
   ],
-  "author": "HelenDias",
-  "license": "Copyright 2018 Presente em Palavras",
-  "bugs": {
-    "url": "https://github.com/Turbiani/presente-palavras-api/issues"
-  },
-  "homepage": "https://github.com/Turbiani/presente-palavras-api#readme"
+  "author": "andre000 | andre@dev-next.com, HelenDias | helen@dev-next.com",
+  "license": "Copyright 2020 Dev-Next",
+  "homepage": "https://github.com/dev-next"
 }
