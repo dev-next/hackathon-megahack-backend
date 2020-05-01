@@ -6,7 +6,7 @@ const typeDefs = gql`
   """Mutation to create a User"""
     createStoreAndOwner(
       user: UserInput!
-      store: StoreInput
+      store: StoreInput!
     ): User
   }
 `;

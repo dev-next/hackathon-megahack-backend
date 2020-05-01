@@ -6,7 +6,7 @@ function GenerateStoresMongoSchema(injection) {
   const storeMongoSchema = new Schema({
     email: String,
     name: { type: String, required: true },
-    document_number: {
+    documentNumber: {
       type: String,
       required: true,
       index: { unique: true },
@@ -21,7 +21,7 @@ function GenerateStoresMongoSchema(injection) {
       neighborhood: { type: String },
       complements: { type: String },
     },
-    opening_hours: [{
+    openingHours: [{
       weekday: String,
       range: {
         start: Date,
