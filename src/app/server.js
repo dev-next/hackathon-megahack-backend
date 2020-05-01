@@ -1,4 +1,5 @@
 // EXPRESS
+require ('dotenv').config();
 const express = require('express');
 // GRAPHQL SERVER
 const { ApolloServer } = require('apollo-server-express');
@@ -13,7 +14,7 @@ const mongo = require('./infrastructure/mongodb-models/index')();
 const TokenService = require('./domain/services/TokenService');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // APPLY MIDDLEWARES
 app.use(helmet());
