@@ -4,7 +4,6 @@ const typeDefs = gql`
   type Store {
     id: ID
     name: String
-    corporateName: String
     documentNumber: String
     location: Location
     openingHours: [OpeningHours]
@@ -13,7 +12,6 @@ const typeDefs = gql`
 
   input StoreInput {
     name: String
-    corporateName: String
     documentNumber: String
     location: LocationInput
     openingHours: [OpeningHoursInput]

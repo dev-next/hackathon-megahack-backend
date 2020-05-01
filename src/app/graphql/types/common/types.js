@@ -16,6 +16,7 @@ const typeDefs = gql`
   }
 
   type Location {
+    zipcode: String
     country: String
     state: String
     city: String
@@ -25,6 +26,7 @@ const typeDefs = gql`
   }
 
   input LocationInput {
+    zipcode: String
     country: String
     state: String
     city: String
