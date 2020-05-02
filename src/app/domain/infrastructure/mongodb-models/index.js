@@ -12,6 +12,7 @@ function MappingObjects(injection) {
     mappingObjects = {
       UserPersistentModel: require('./UserPersistentModel')({ connection: conn, Schema }),
       StorePersistentModel: require('./StorePersistentModel')({ connection: conn, Schema }),
+      SysActionPersistentModel: require('./SysActionPersistentModel')({ connection: conn, Schema }),
     }
   }
   return mappingObjects;
