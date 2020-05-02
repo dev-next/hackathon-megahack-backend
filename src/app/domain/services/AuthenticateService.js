@@ -22,7 +22,7 @@ class AuthenticateService {
 
       if (!user) {
         Logger.warn(`Usuário ${data.phone} não encontrado`);
-        throw new AuthenticationError('Usuário no encontrado! Já verificou se o e-mail está correto?');
+        throw new AuthenticationError('Usuário não encontrado! Já verificou se o e-mail está correto?');
       }
 
       const valid = await bcrypt.compare(data.password, user.password);
