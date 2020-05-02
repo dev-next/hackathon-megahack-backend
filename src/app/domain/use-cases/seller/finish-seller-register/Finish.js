@@ -29,11 +29,11 @@ const FinishRegister = async (data, injection) => {
   }
 
   try {
-    const isValid = ValidateHashCode({ hash: data.hash }, injection);
+    const isValid = await ValidateHashCode({ hash: data.hash }, injection);
     console.log('isValid:', isValid);
 
     if (!isValid) {
-      throw new Error('Ops, detectamos que este código de ação não está mais válido.' +
+      return new Error('Ops, detectamos que este código de ação não está mais válido.' +
         ' Por favor, solicite um novo link de criação de conta com o seu gerente.');
     }
 
@@ -51,6 +51,9 @@ const FinishRegister = async (data, injection) => {
         active: true,
         password,
       }, true);
+
+    await new SysActionRepository(injection, SysActionPersistentModel)
+      .update(sysAction._id, { active: false });
 
     return await AuthenticateService
       .user({
