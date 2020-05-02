@@ -23,7 +23,17 @@ function GenerateUsersMongoSchema(injection) {
       default: 'CUSTOMER',
       enum: ['CUSTOMER', 'STORE_OWNER', 'SELLER'],
     },
+    photo: String,
     stores: [String],
+    invite: {
+      invitedBy: { type: Schema.Types.ObjectId, ref: 'users' },
+      status: {
+        type: String,
+        uppercase: true,
+        default: 'PENDING',
+        enum: ['PENDING', 'ACCEPTED'],
+      },
+    },
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
   return connection.model('users', userMongoSchema);

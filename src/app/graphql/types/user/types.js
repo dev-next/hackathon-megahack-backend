@@ -16,6 +16,8 @@ const typeDefs = gql`
     password: String
     phone: String
     stores: [Store]
+    photo: String
+    invite: InviteSeller
     active: Boolean
     creationDate: DateTime
     updateDate: DateTime
@@ -24,9 +26,26 @@ const typeDefs = gql`
   input UserInput {
     name: String!
     phone: String!
-    password: String!
+    password: String
     email: String
     stores: [StoreInput]
+    photo: String
+    invite: InviteSellerInput
+  }
+
+  type InviteSeller {
+    invitedBy: User
+    status: _InviteSellerStatusEnum
+  }
+
+  input InviteSellerInput {
+    invitedBy: ID
+    status: _InviteSellerStatusEnum
+  }
+
+  enum _InviteSellerStatusEnum {
+    ACCEPTED
+    PENDING
   }
 `;
 
