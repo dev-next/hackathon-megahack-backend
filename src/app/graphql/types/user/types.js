@@ -32,7 +32,6 @@ const typeDefs = gql`
     email: String
     stores: [StoreInput]
     photo: String
-    invite: InviteSellerInput
     tags: [String]
   }
 
