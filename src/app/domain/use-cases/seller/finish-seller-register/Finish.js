@@ -1,4 +1,5 @@
 const dependencies = {
+  AuthenticateService: require('../../../../domain/services/AuthenticateService'),
   SysActionRepository: require('../../../infrastructure/repository/SysActionRepository'),
   ValidateHashCode: require('../../sysAction/validate-hashcode/ValidateHashCode'),
   UserRepository: require('../../../infrastructure/repository/UserRepository'),
@@ -8,6 +9,8 @@ const dependencies = {
 const FinishRegister = async (data, injection) => {
   const {
     SysActionPersistentModel,
+    AuthenticationError,
+    AuthenticateService,
     UserPersistentModel,
     SysActionRepository,
     ValidateHashCode,
@@ -40,7 +43,7 @@ const FinishRegister = async (data, injection) => {
     const sysAction = await new SysActionRepository(injection, SysActionPersistentModel)
       .findOneByWhere({ hash: data.hash });
 
-    return new UserRepository(injection, UserPersistentModel)
+    await new UserRepository(injection, UserPersistentModel)
       .update(sysAction.requester, {
         ...data.user,
         'invite.status': 'ACCEPTED',
@@ -48,8 +51,15 @@ const FinishRegister = async (data, injection) => {
         active: true,
         password,
       }, true);
+
+    return await AuthenticateService
+      .user({
+        phone: data.user.phone,
+        password: data.user.password,
+      }, { UserPersistentModel, AuthenticationError });
   } catch (e) {
-    throw new Error(`Error on create User, ${e.message}`);
+    throw new Error(`Ops, não foi possível finalizar seu cadastro.
+    Por favor, verifique os dados preenchidos e tente novamente, ${e.message}`);
   }
 };
 

@@ -1,4 +1,4 @@
-const { gql, UserInputError } = require('apollo-server-express');
+const { gql, UserInputError, AuthenticationError } = require('apollo-server-express');
 const CreateStoreAndOwner = require('../../../domain/use-cases/owner/create-store-and-owner/CreateStoreAndOwner');
 const CreateUser = require('../../../domain/use-cases/user/create-user/CreateUser');
 const FinishSellerRegister = require('../../../domain/use-cases/seller/finish-seller-register/Finish');
@@ -91,7 +91,11 @@ const resolvers = {
         });
       }
 
-      return FinishSellerRegister(data, { UserPersistentModel, SysActionPersistentModel });
+      return FinishSellerRegister(data, {
+        AuthenticationError,
+        UserPersistentModel,
+        SysActionPersistentModel,
+      });
     },
   },
 };

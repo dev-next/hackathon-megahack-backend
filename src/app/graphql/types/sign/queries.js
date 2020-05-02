@@ -8,7 +8,7 @@ const typeDefs = gql`
       phone: String!
       password: String!
     ): Sign
-  }  
+  }
 `;
 
 const resolvers = {
