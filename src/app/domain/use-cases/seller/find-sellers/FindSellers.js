@@ -3,7 +3,7 @@ const dependencies = {
   MakeParamsToFind: require('./helpers/MakeParamsToFind'),
 };
 
-const FindSellers = (data, injection) => {
+const FindSellers = async (data, injection) => {
   const {
     UserPersistentModel,
     MakeParamsToFind,
@@ -16,9 +16,18 @@ const FindSellers = (data, injection) => {
     throw new ForbiddenError('Você não está logado na plataforma. Por favor, faça login e tente novamente');
   }
 
-  const params = MakeParamsToFind(data.where);
+  if (UserLogged.type !== 'STORE_OWNER') {
+    throw new Error('Você não tem permissão para acessar este recurso');
+  }
 
-  return new UserRepository(injection, UserPersistentModel).find(params);
+  try {
+    const params = await MakeParamsToFind(data.where);
+
+    return new UserRepository(injection, UserPersistentModel).find(params);
+  } catch (e) {
+    throw new Error('Ops, ocorreu algum erro ao buscar os vendedores ativos na plataforma.' +
+      ' Por favor, tente recarregar a página.');
+  }
 };
 
 module.exports = FindSellers;
