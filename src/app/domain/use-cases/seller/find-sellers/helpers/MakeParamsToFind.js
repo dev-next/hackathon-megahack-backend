@@ -22,7 +22,10 @@ const MakeParams = async (data, injection) => {
     };
   }
 
-  return newData;
+  return {
+    ...newData,
+    active: true,
+  };
 };
 
 module.exports = MakeParams;

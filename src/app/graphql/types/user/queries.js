@@ -3,7 +3,7 @@ const FindUsers = require('../../../domain/use-cases/seller/find-sellers/FindSel
 
 const typeDefs = gql`
   extend type Query {
-  """Query to find all active uses from application"""
+  """Query to find all active sellers from application"""
     sellers(
       where: UserWhereInput
     ): [User]
