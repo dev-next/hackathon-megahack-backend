@@ -36,6 +36,7 @@ function GenerateUsersMongoSchema(injection) {
     },
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
+
   return connection.model('users', userMongoSchema);
 }
 

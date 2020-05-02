@@ -1,5 +1,6 @@
 const { gql, UserInputError } = require('apollo-server-express');
 const CreateStoreAndOwner = require('../../../domain/use-cases/user/create-store-and-owner/CreateStoreAndOwner');
+const CreateUser = require('../../../domain/use-cases/user/create-user/CreateUser');
 
 const typeDefs = gql`
   extend type Mutation {
@@ -8,25 +9,45 @@ const typeDefs = gql`
       user: UserInput!
       store: StoreInput!
     ): User
+
+    createUser(
+      user: UserInput!
+    ): User
   }
 `;
 
 const resolvers = {
   Mutation: {
-    createStoreAndOwner:  (
+    createStoreAndOwner: (
       root,
       data,
       {
         db: { UserPersistentModel, StorePersistentModel },
-        Logger,
       },
     ) => {
-      if (data.name === '' || data.email === '') {
-        throw new UserInputError('Arguments invalid', {
-          invalidArgs: data.name === '' ? ['name'] : ['email'],
+      if (!data.user || !data.store) {
+        throw new UserInputError('Dados inválidos', {
+          invalidArgs: !data.user ? 'usuário' : 'loja',
         });
       }
-      return CreateStoreAndOwner(data, { UserPersistentModel, StorePersistentModel, Logger });
+
+      return CreateStoreAndOwner(data, { UserPersistentModel, StorePersistentModel });
+    },
+
+    createUser: (
+      root,
+      data,
+      {
+        db: { UserPersistentModel },
+      },
+    ) => {
+      if (!data.user) {
+        throw new UserInputError('Dados inválidos', {
+          invalidArgs: 'usuário',
+        });
+      }
+
+      return CreateUser(data, { UserPersistentModel });
     },
   },
 };

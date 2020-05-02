@@ -10,7 +10,6 @@ const CreateStoreAndOwner = async (data, injection) => {
     UserPersistentModel,
     StoreRepository,
     UserRepository,
-    Logger,
     bcrypt,
   } = Object.assign({}, dependencies, injection);
 
@@ -27,7 +26,6 @@ const CreateStoreAndOwner = async (data, injection) => {
       password,
     });
   } catch (e) {
-    Logger.warn(e.message);
     throw new Error(`Error on create User, ${e.message}`);
   }
 };
