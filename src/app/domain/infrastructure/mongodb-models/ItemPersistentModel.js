@@ -10,7 +10,6 @@ function GenerateItemsMongoSchema(injection) {
     value: Number,
     tags: [String],
     fields: [{
-      type: { type: String },
       label: String,
       value: String,
     }],

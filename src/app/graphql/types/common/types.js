@@ -34,6 +34,16 @@ const typeDefs = gql`
     street: String
     number: String
   }
+
+  type Field {
+    label: String
+    value: String
+  }
+
+  input FieldInput {
+    label: String
+    value: String
+  }
 `;
 
 const resolvers = {
