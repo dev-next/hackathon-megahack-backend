@@ -27,6 +27,7 @@ const typeDefs = gql`
   input UserInput {
     name: String!
     phone: String!
+    type: _UserType
     password: String
     email: String
     stores: [StoreInput]

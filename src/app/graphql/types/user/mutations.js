@@ -1,7 +1,7 @@
 const { gql, UserInputError } = require('apollo-server-express');
-const CreateStoreAndOwner = require('../../../domain/use-cases/user/create-store-and-owner/CreateStoreAndOwner');
+const CreateStoreAndOwner = require('../../../domain/use-cases/owner/create-store-and-owner/CreateStoreAndOwner');
 const CreateUser = require('../../../domain/use-cases/user/create-user/CreateUser');
-const FinishSellerRegister = require('../../../domain/use-cases/user/finish-seller-register/Finish');
+const FinishSellerRegister = require('../../../domain/use-cases/seller/finish-seller-register/Finish');
 
 const typeDefs = gql`
   extend type Mutation {
