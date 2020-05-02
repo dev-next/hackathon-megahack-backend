@@ -2,7 +2,7 @@ const dependencies = {
   SysActionRepository: require('../../../infrastructure/repository/SysActionRepository'),
   UserRepository: require('../../../infrastructure/repository/UserRepository'),
   moment: require('moment'),
-  uuid: require('uuid'),
+  uuid: require('uuid').v4,
 };
 
 const InviteSeller = async (data, injection) => {
@@ -21,21 +21,21 @@ const InviteSeller = async (data, injection) => {
   }
 
   try {
+    await new UserRepository(injection, UserPersistentModel)
+      .create(data.user);
+
     const sysAction = {
       requester: data.owner,
       action: 'INVITE_USER',
-      metadata: data.user,
-      expirationDate: moment().add('days', 3),
+      metadata: JSON.stringify(data.user),
+      expirationDate: moment().add(3, 'days'),
       hash: uuid(),
     };
 
-    await new SysActionRepository(injection, SysActionPersistentModel)
+    return !! new SysActionRepository(injection, SysActionPersistentModel)
       .create(sysAction);
-
-    return new UserRepository(injection, UserPersistentModel)
-      .create(data.user);
   } catch (e) {
-    throw new Error(`Error on create User, ${e.message}`);
+    throw new Error(`Erro ao convidar usuário, ${e.message}`);
   }
 };
 

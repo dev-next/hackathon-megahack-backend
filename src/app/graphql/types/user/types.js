@@ -30,7 +30,7 @@ const typeDefs = gql`
     type: _UserType
     password: String
     email: String
-    stores: [StoreInput]
+    stores: [ID]
     photo: String
     tags: [String]
   }
