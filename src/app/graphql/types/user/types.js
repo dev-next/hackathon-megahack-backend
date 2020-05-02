@@ -24,6 +24,12 @@ const typeDefs = gql`
     updateDate: DateTime
   }
 
+  input UserWhereInput {
+    name: String
+    phone: String
+    type: _UserType
+  }
+  
   input UserInput {
     name: String!
     phone: String!

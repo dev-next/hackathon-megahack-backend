@@ -1,16 +1,18 @@
 const { gql, ForbiddenError } = require('apollo-server-express');
-const FindUsers = require('../../../domain/use-cases/user/find-user/FindUsers');
+const FindUsers = require('../../../domain/use-cases/seller/find-sellers/FindSellers');
 
 const typeDefs = gql`
   extend type Query {
   """Query to find all active uses from application"""
-    users: [User]
+    sellers(
+      where: UserWhereInput
+    ): [User]
   }
 `;
 
 const resolvers = {
   Query: {
-    users:  (
+    sellers: (
       root,
       data,
       {
