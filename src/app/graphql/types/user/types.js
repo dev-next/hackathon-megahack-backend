@@ -18,6 +18,7 @@ const typeDefs = gql`
     stores: [Store]
     photo: String
     invite: InviteSeller
+    tags: [String]
     active: Boolean
     creationDate: DateTime
     updateDate: DateTime
@@ -31,6 +32,7 @@ const typeDefs = gql`
     stores: [StoreInput]
     photo: String
     invite: InviteSellerInput
+    tags: [String]
   }
 
   type InviteSeller {
