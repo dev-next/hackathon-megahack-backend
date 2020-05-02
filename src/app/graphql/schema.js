@@ -6,6 +6,7 @@ const { userTypeDefs, userResolvers } = require('./types/user/');
 const { signTypeDefs, signResolvers } = require('./types/sign/');
 const { storeTypeDefs, storeResolvers } = require('./types/store/');
 const { commonTypeDefs, commonResolvers } = require('./types/common/');
+const { sysActionTypeDefs, sysActionResolvers } = require('./types/sysAction/');
 
 // DEFAULT EMPTY ROOT TYPES
 const RootTypes = gql`
@@ -25,6 +26,7 @@ const typeDefs = flatten([
   signTypeDefs,
   storeTypeDefs,
   commonTypeDefs,
+  sysActionTypeDefs,
 ]);
 const resolvers = merge(
   {},
@@ -32,6 +34,7 @@ const resolvers = merge(
   signResolvers,
   storeResolvers,
   commonResolvers,
+  sysActionResolvers,
 );
 
 module.exports = makeExecutableSchema({
