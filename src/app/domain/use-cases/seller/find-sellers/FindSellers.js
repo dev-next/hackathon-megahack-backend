@@ -1,9 +1,12 @@
 const dependencies = {
   UserRepository: require('../../../infrastructure/repository/UserRepository'),
+  MakeParamsToFind: require('./helpers/MakeParamsToFind'),
 };
 
 const FindSellers = (data, injection) => {
   const {
+    UserPersistentModel,
+    MakeParamsToFind,
     ForbiddenError,
     UserRepository,
     UserLogged,
@@ -13,7 +16,9 @@ const FindSellers = (data, injection) => {
     throw new ForbiddenError('Você não está logado na plataforma. Por favor, faça login e tente novamente');
   }
 
-  return new UserRepository(injection).findUsers();
+  const params = MakeParamsToFind(data.where);
+
+  return new UserRepository(injection, UserPersistentModel).find(params);
 };
 
 module.exports = FindSellers;

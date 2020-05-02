@@ -18,13 +18,11 @@ const resolvers = {
       {
         db: { UserPersistentModel },
         UserLogged,
-        Logger,
       },
     ) => FindUsers(data, {
       UserPersistentModel,
       ForbiddenError,
       UserLogged,
-      Logger,
     }),
   },
 };

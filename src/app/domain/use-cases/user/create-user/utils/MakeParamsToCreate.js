@@ -2,7 +2,7 @@ const dependencies = {
   bcrypt: require('bcrypt'),
 };
 
-const MakeContractParamsToCreate = async (data, injection) => {
+const MakeParams = async (data, injection) => {
   const { bcrypt } = Object.assign({}, dependencies, injection);
 
   let newData = Object.assign(data, {});
@@ -24,4 +24,4 @@ const MakeContractParamsToCreate = async (data, injection) => {
   return newData;
 };
 
-module.exports = MakeContractParamsToCreate;
+module.exports = MakeParams;
