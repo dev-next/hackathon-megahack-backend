@@ -13,7 +13,6 @@ const typeDefs = gql`
     type: _UserType
     name: String
     email: String
-    password: String
     phone: String
     stores: [Store]
     photo: String
