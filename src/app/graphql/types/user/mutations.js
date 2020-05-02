@@ -60,7 +60,7 @@ const resolvers = {
       root,
       data,
       {
-        db: { UserPersistentModel },
+        db: { UserPersistentModel, SysActionPersistentModel },
       },
     ) => {
       if (!data.hash || !data.user) {
@@ -69,7 +69,7 @@ const resolvers = {
         });
       }
 
-      return FinishSellerRegister(data, { UserPersistentModel });
+      return FinishSellerRegister(data, { UserPersistentModel, SysActionPersistentModel });
     },
   },
 };
