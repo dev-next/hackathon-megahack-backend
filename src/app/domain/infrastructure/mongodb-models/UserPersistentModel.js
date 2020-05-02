@@ -30,6 +30,7 @@ function GenerateUsersMongoSchema(injection) {
         enum: ['PENDING', 'ACCEPTED'],
       },
     },
+    tags: [String],
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
 
