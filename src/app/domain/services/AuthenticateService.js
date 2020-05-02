@@ -1,6 +1,5 @@
 const internalDependencies = {
   UserRepository: require('../infrastructure/repository/UserRepository'),
-  Logger: require('../../utils/Logger'),
   bcrypt: require('bcrypt'),
   jwt: require('jsonwebtoken'),
 };
@@ -12,7 +11,6 @@ class AuthenticateService {
       UserPersistentModel,
       UserRepository,
       bcrypt,
-      Logger,
       jwt,
     } = Object.assign({}, internalDependencies, externalDependencies);
 
@@ -21,8 +19,7 @@ class AuthenticateService {
         .findOneByWhere({ phone: data.phone });
 
       if (!user) {
-        Logger.warn(`Usuário ${data.phone} não encontrado`);
-        throw new AuthenticationError('Usuário não encontrado! Já verificou se o e-mail está correto?');
+        throw new AuthenticationError('Usuário não encontrado! Já verificou se o telefone está correto?');
       }
 
       const valid = await bcrypt.compare(data.password, user.password);
@@ -50,12 +47,10 @@ class AuthenticateService {
           }
         };
       } else {
-        Logger.warn(`Telefone ou senha do usuário ${data.phone} incorretos`);
         throw new AuthenticationError('Ops, parece que os seus dados não estão corretos. Corriga o telefone ou a senha e tente novamente');
       }
     } catch (e) {
-      Logger.warn(`Telefone ou senha do usuário ${data.phone} incorretos`);
-      throw e;
+      throw new Error(`Telefone ou senha do usuário ${data.phone} incorretos`);
     }
   }
 
