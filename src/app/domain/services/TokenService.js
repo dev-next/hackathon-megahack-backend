@@ -9,7 +9,7 @@ class TokenService {
       const token = Authorization.replace('Bearer ', '');
       let dados;
       try {
-        dados = jwt.verify(token, 'MyAP1@20185b560566a59bf52343d99da7-gr4phql');
+        dados = jwt.verify(token, process.env.API_KEY);
       } catch (e) {
         return callback(e, null);
       }
