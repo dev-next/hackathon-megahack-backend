@@ -36,6 +36,13 @@ class Repository {
       .exec();
   }
 
+  findOneByWhere(where = { active: true }, selectThisFields = {}) {
+    return this._entity
+      .findOne(where)
+      .select(selectThisFields)
+      .exec();
+  }
+
   update(id, payload, returnNew = false, eventName = '') {
     const { RepositoryEventHandler } = this._dependencies;
 

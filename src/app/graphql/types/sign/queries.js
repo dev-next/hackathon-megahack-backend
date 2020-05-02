@@ -4,7 +4,10 @@ const Authenticate = require('../../../domain/services/AuthenticateService');
 const typeDefs = gql`
   extend type Query {
   """Query to authenticate User on Application"""
-    authenticate(email: String!, password: String!): Sign
+    authenticate(
+      phone: String!
+      password: String!
+    ): Sign
   }  
 `;
 

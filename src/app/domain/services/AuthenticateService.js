@@ -1,8 +1,8 @@
 const internalDependencies = {
-  jwt: require('jsonwebtoken'),
   UserRepository: require('../infrastructure/repository/UserRepository'),
-  CreatePassword: require('../../utils/CreatePassword'),
   Logger: require('../../utils/Logger'),
+  bcrypt: require('bcrypt'),
+  jwt: require('jsonwebtoken'),
 };
 
 class AuthenticateService {
@@ -11,43 +11,50 @@ class AuthenticateService {
       AuthenticationError,
       UserPersistentModel,
       UserRepository,
+      bcrypt,
       Logger,
       jwt,
-      CreatePassword,
     } = Object.assign({}, internalDependencies, externalDependencies);
 
     try {
-      const password = CreatePassword.make(data.password);
+      const user = await new UserRepository(externalDependencies, UserPersistentModel)
+        .findOneByWhere({ phone: data.phone });
 
-      const dataFinded = await new UserRepository(externalDependencies)
-        .findUserByEmail(data.email, { UserPersistentModel });
+      if (!user) {
+        Logger.warn(`Usuário ${data.phone} não encontrado`);
+        throw new AuthenticationError('Usuário no encontrado! Já verificou se o e-mail está correto?');
+      }
 
-      if (!dataFinded) {
-        Logger.warn(`User ${data.email} not finded`);
-        throw new AuthenticationError('Email or Password incorrect');
-      } else if (password === dataFinded.password) {
+      const valid = await bcrypt.compare(data.password, user.password);
 
+      if (valid && user.active) {
         const payload = {
-          id: dataFinded._id,
-          email: dataFinded.email,
-          type: dataFinded.type,
-          active: dataFinded.active,
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          type: user.type,
+          stores: user.stores,
         };
 
         return {
           // add your encryption key here
-          token: jwt.sign(payload, 'MyAP1@20185b560566a59bf52343d99da7-gr4phql'),
+          token: jwt.sign(payload, process.env.API_KEY),
           user: {
-            id: dataFinded._id,
-            name: dataFinded.name,
-            type: dataFinded.type,
-            email: dataFinded.email,
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            type: user.type,
+            stores: user.stores,
           }
         };
       } else {
-        throw new AuthenticationError('Email or Password incorrect');
+        Logger.warn(`Telefone ou senha do usuário ${data.phone} incorretos`);
+        throw new AuthenticationError('Ops, parece que os seus dados não estão corretos. Corriga o telefone ou a senha e tente novamente');
       }
     } catch (e) {
+      Logger.warn(`Telefone ou senha do usuário ${data.phone} incorretos`);
       throw e;
     }
   }
@@ -57,8 +64,8 @@ class AuthenticateService {
       UserPersistentModel,
       UserRepository,
     } = Object.assign({}, internalDependencies, externalDependencies);
-    return new UserRepository(externalDependencies)
-      .findUserById(id, { UserPersistentModel });
+    return new UserRepository(externalDependencies, UserPersistentModel)
+        .findOne(id);
   }
 }
 
