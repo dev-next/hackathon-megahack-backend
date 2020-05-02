@@ -15,7 +15,6 @@ const sysActionMongoSchema = new Schema({
     ],
   },
   metadata: { type: String, required: false },
-  used: { type: Boolean, default: false },
   expirationDate: { type: Date, required: true },
   creationDate: { type: Date, default: Date.now },
   active: { type: Boolean, default: true },
