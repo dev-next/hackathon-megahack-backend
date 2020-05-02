@@ -5,16 +5,12 @@ function GenerateUsersMongoSchema(injection) {
   } = Object.assign({}, injection);
   const userMongoSchema = new Schema({
     name: { type: String, required: true },
-    email: {
-      type: String,
-      required: false,
-      lowercase: true,
-      index: { unique: true },
-    },
+    email: String,
     password: String,
     phone: {
       type: String,
       required: true,
+      lowercase: true,
       index: { unique: true },
     },
     type: {
