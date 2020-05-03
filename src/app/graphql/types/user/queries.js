@@ -1,5 +1,6 @@
 const { gql, ForbiddenError } = require('apollo-server-express');
 const FindSellers = require('../../../domain/use-cases/seller/find-sellers/FindSellers');
+const FindUsers = require('../../../domain/use-cases/user/find-user/FindUsers');
 const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
 const typeDefs = gql`
@@ -12,6 +13,10 @@ const typeDefs = gql`
     user(
       userId: ID!
     ): User
+
+    users(
+      where: UserWhereInput
+    ): [User]
   }
 `;
 
@@ -38,6 +43,19 @@ const resolvers = {
         UserLogged,
       },
     ) => FindUser(data, {
+      UserPersistentModel,
+      ForbiddenError,
+      UserLogged,
+    }),
+
+    users: (
+      root,
+      data,
+      {
+        db: { UserPersistentModel },
+        UserLogged,
+      },
+    ) => FindUsers(data, {
       UserPersistentModel,
       ForbiddenError,
       UserLogged,
