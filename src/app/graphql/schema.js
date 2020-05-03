@@ -6,6 +6,7 @@ const { userTypeDefs, userResolvers } = require('./types/user');
 const { signTypeDefs, signResolvers } = require('./types/sign');
 const { itemTypeDefs, itemResolvers } = require('./types/items');
 const { storeTypeDefs, storeResolvers } = require('./types/store');
+const { orderTypeDefs, orderResolvers } = require('./types/order');
 const { commonTypeDefs, commonResolvers } = require('./types/common');
 const { catalogueTypeDefs, catalogueResolvers } = require('./types/catalogue');
 const { sysActionTypeDefs, sysActionResolvers } = require('./types/sysAction');
@@ -28,6 +29,7 @@ const typeDefs = flatten([
   signTypeDefs,
   itemTypeDefs,
   storeTypeDefs,
+  orderTypeDefs,
   commonTypeDefs,
   catalogueTypeDefs,
   sysActionTypeDefs,
@@ -38,6 +40,7 @@ const resolvers = merge(
   signResolvers,
   itemResolvers,
   storeResolvers,
+  orderResolvers,
   commonResolvers,
   catalogueResolvers,
   sysActionResolvers,

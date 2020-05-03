@@ -40,6 +40,7 @@ function GenerateOrdersMongoSchema(injection) {
         enum: ['MONEY', 'CREDIT_CARD'],
       },
       needChange: Boolean,
+      changeTo: Number,
     },
     items: [{
       fromItem: { type: Schema.Types.ObjectId, ref: 'items' },

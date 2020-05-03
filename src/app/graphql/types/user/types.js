@@ -10,7 +10,7 @@ const typeDefs = gql`
 
   """Object Type that represents a User"""
   type User {
-    id: ID!
+    id: ID
     type: _UserType
     name: String
     email: String

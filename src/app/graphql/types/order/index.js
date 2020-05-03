@@ -1,17 +1,17 @@
 const { merge } = require('lodash');
-const { typeDefs: nameObjectTypes } = require('./types');
-const { resolvers: nameObjectTypesResolvers } = require('./types');
-const { typeDefs: nameObjectQueries } = require('./queries');
-const { resolvers: nameObjectQueriesResolvers } = require('./queries');
-const { typeDefs: nameObjectMutations } = require('./mutations');
-const { resolvers: nameObjectMutationsResolvers } = require('./mutations');
+const { typeDefs: orderObjectTypes } = require('./types');
+const { resolvers: orderObjectTypesResolvers } = require('./types');
+const { typeDefs: orderObjectQueries } = require('./queries');
+const { resolvers: orderObjectQueriesResolvers } = require('./queries');
+const { typeDefs: orderObjectMutations } = require('./mutations');
+const { resolvers: orderObjectMutationsResolvers } = require('./mutations');
 
 module.exports = {
-  nameTypeDefs: [nameObjectTypes, nameObjectQueries, nameObjectMutations],
-  nameResolvers: merge(
+  orderTypeDefs: [orderObjectTypes, orderObjectQueries, orderObjectMutations],
+  orderResolvers: merge(
     {},
-    nameObjectTypesResolvers,
-    nameObjectQueriesResolvers,
-    nameObjectMutationsResolvers,
+    orderObjectTypesResolvers,
+    orderObjectQueriesResolvers,
+    orderObjectMutationsResolvers,
   ),
 };

@@ -53,6 +53,7 @@ const typeDefs = gql`
   input PaymentInput {
     method: _PaymentMethodEnum
     needChange: Boolean
+    changeTo: Float
   }
 
   enum _PaymentMethodEnum {

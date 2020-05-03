@@ -1,16 +1,14 @@
 const internalDependencies = {
   mongoose: require('mongoose'),
-  omit: require('lodash/omit'),
 };
 
 const MakeParams = async (data, injection) => {
   const {
     UserLogged,
     mongoose,
-    omit,
   } = Object.assign({}, internalDependencies, injection);
 
-  let newData = Object.assign({ ...omit(data, 'ids') }, {});
+  let newData = Object.assign(data, {});
 
   if (data.name) {
     newData = {
@@ -19,25 +17,23 @@ const MakeParams = async (data, injection) => {
     };
   }
 
-  if (data.tags && data.tags.length) {
-    const regex = new RegExp(data.tags.join('|'));
-
+  if (data.customer) {
     newData = {
       ...newData,
-      tags: { $in: regex },
+      customer: mongoose.Types.ObjectId(data.customer),
     };
   }
 
-  if (data.ids && data.ids.length) {
+  if (data.seller) {
     newData = {
       ...newData,
-      _id: { $in: data.ids.map(id => mongoose.Types.ObjectId(id)) },
+      seller: mongoose.Types.ObjectId(data.seller),
     };
   }
 
   return {
     ...newData,
-    store: { $in: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)) },
+    store: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)),
     active: true,
   };
 };

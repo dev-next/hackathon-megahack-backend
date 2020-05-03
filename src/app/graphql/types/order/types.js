@@ -1,4 +1,6 @@
 const { gql } = require('apollo-server-express');
+const FindStore = require('../../../domain/use-cases/user/find-store/FindStore');
+const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
 const typeDefs = gql`
   type Order {
@@ -10,13 +12,13 @@ const typeDefs = gql`
     delivery: Delivery
     payment: Payment
     items: OrderItems
-    customer: User
+    customer: OrderUser
     seller: User
     active: Boolean
     creationDate: DateTime
     updateDate: DateTime
   }
-  
+
   input OrderInput {
     name: String
     value: Float
@@ -24,10 +26,26 @@ const typeDefs = gql`
     delivery: DeliveryInput
     payment: PaymentInput
     items: OrderItemsInput
-    customer: ID
+    customer: OrderUserInput
     seller: ID
   }
-  
+
+  type OrderUser {
+    fromUser: User
+    name: String
+    email: String
+    phone: String
+    tags: [String]
+  }
+
+  input OrderUserInput {
+    fromUser: ID
+    name: String
+    email: String
+    phone: String
+    tags: [String]
+  }
+
   type OrderItems {
     fromItem: Item
     name: String
@@ -35,7 +53,7 @@ const typeDefs = gql`
     value: Float
     fields: [Field]
   }
-  
+
   input OrderItemsInput {
     fromItem: ID
     name: String
@@ -43,9 +61,73 @@ const typeDefs = gql`
     value: Float
     fields: [FieldInput]
   }
+
+  input OrderWhereInput {
+    name: String
+    number: Int
+    customer: ID
+    seller: ID
+  }
 `;
 
-const resolvers = {};
+const resolvers = {
+  OrderUser: {
+    fromUser: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { UserPersistentModel },
+      }
+    ) => {
+      if (root.fromUser) {
+        return FindUser({
+          userId: root.fromUser,
+        }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
+    },
+  },
+
+  Order: {
+    id: root => root._id || root.id,
+
+    store: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { StorePersistentModel },
+      }
+    ) => {
+      if (root.store) {
+        return FindStore({
+          storeId: root.store,
+        }, { UserLogged, StorePersistentModel });
+      }
+
+      return {};
+    },
+
+    seller: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { UserPersistentModel },
+      }
+    ) => {
+      if (root.seller) {
+        return FindUser({
+          userId: root.seller,
+        }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
+    },
+  },
+};
 
 module.exports = {
   typeDefs,
