@@ -1,5 +1,6 @@
 const MakeParams = async (data, injection) => {
   let newData = Object.assign(data, {});
+  const { UserLogged } = injection;
 
   if (data.name) {
     newData = {
@@ -19,6 +20,7 @@ const MakeParams = async (data, injection) => {
 
   return {
     ...newData,
+    store: { $in: UserLogged.stores.map(store => store.id.toString()) },
     active: true,
   };
 };
