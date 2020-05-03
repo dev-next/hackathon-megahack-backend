@@ -18,6 +18,7 @@ const resolvers = {
       data,
       {
         db: { ItemPersistentModel },
+        UserLogged,
       },
     ) => {
       if (!data.item || !data.store || !data.createdBy) {
@@ -26,7 +27,7 @@ const resolvers = {
         });
       }
 
-      return CreateItem(data, { ItemPersistentModel });
+      return CreateItem(data, { ItemPersistentModel, UserLogged });
     },
   },
 };
