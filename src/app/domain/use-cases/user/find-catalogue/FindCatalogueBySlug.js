@@ -20,7 +20,7 @@ const FindCatalogueBySlug = async (data, injection) => {
   }
 
   const newData = Object.assign(data.where, {});
-  const params = await MakeParams(newData);
+  const params = await MakeParams(newData, { UserLogged });
 
   return new CatalogueRepository(injection, CataloguePersistentModel)
     .findOneByWhere(params)

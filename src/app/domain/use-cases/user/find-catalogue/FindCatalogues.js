@@ -4,6 +4,7 @@ const dependencies = {
 };
 
 const FindCatalogueBySlug = async (data, injection) => {
+  console.log(injection);
   const {
     CataloguePersistentModel,
     CatalogueRepository,
@@ -20,7 +21,7 @@ const FindCatalogueBySlug = async (data, injection) => {
   }
 
   const newData = Object.assign(data.where || {}, {});
-  const params = await MakeParams(newData, UserLogged);
+  const params = await MakeParams(newData, { UserLogged });
 
   return new CatalogueRepository(injection, CataloguePersistentModel)
     .find(params)

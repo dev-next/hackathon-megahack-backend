@@ -25,11 +25,11 @@ const resolvers = {
       root,
       data,
       {
-        db: { ItemPersistentModel },
+        db: { CataloguePersistentModel },
         UserLogged,
       },
     ) => FindCatalogues(data, {
-      ItemPersistentModel,
+      CataloguePersistentModel,
       UserLogged,
     }),
 
@@ -37,11 +37,11 @@ const resolvers = {
       root,
       data,
       {
-        db: { ItemPersistentModel },
+        db: { CataloguePersistentModel },
         UserLogged,
       },
     ) => FindCatalogue(data, {
-      ItemPersistentModel,
+      CataloguePersistentModel,
       UserLogged,
     }),
 
@@ -49,11 +49,11 @@ const resolvers = {
       root,
       data,
       {
-        db: { ItemPersistentModel },
+        db: { CataloguePersistentModel },
         UserLogged,
       },
     ) => FindCatalogueBySlug(data, {
-      ItemPersistentModel,
+      CataloguePersistentModel,
       UserLogged,
     }),
   },
