@@ -1,5 +1,7 @@
 const internalDependencies = {
+  StoreRepository: require('../infrastructure/repository/StoreRepository'),
   UserRepository: require('../infrastructure/repository/UserRepository'),
+  mongoose: require('mongoose'),
   bcrypt: require('bcrypt'),
   jwt: require('jsonwebtoken'),
 };
@@ -7,9 +9,12 @@ const internalDependencies = {
 class AuthenticateService {
   static async user(data, externalDependencies) {
     const {
+      StorePersistentModel,
       AuthenticationError,
       UserPersistentModel,
+      StoreRepository,
       UserRepository,
+      mongoose,
       bcrypt,
       jwt,
     } = Object.assign({}, internalDependencies, externalDependencies);
@@ -17,6 +22,13 @@ class AuthenticateService {
     try {
       const user = await new UserRepository(externalDependencies, UserPersistentModel)
         .findOneByWhere({ phone: data.phone });
+      const stores = await new StoreRepository(externalDependencies, StorePersistentModel)
+        .find({
+          _id: { $in: user.stores.map(store => mongoose.Types.ObjectId(store)) },
+        }, undefined, undefined, {
+          _id: 1,
+          name: 1,
+        });
 
       if (!user) {
         throw new AuthenticationError('Usuário não encontrado! Já verificou se o telefone está correto?');
@@ -31,7 +43,10 @@ class AuthenticateService {
           email: user.email,
           phone: user.phone,
           type: user.type,
-          stores: user.stores,
+          stores: stores.map(store => ({
+            name: store.name,
+            id: store._id,
+          })),
         };
 
         return {
