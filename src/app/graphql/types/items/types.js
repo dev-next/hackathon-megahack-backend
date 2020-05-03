@@ -25,6 +25,11 @@ const typeDefs = gql`
     fields: [FieldInput]
     active: Boolean
   }
+
+  input ItemWhereInput {
+    name: String
+    tags: [String]
+  }
 `;
 
 const resolvers = {
