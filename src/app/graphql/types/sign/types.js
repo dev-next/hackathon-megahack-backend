@@ -4,7 +4,16 @@ const typeDefs = gql`
   """Object Type that represents a Sign data"""
   type Sign {
     token: String!
-    user: User
+    user: UserSign
+  }
+
+  type UserSign {
+    id: ID
+    name: String
+    email: String
+    phone: String
+    type: _UserType
+    stores: [Store]
   }
 `;
 
