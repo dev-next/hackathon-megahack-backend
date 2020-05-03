@@ -20,7 +20,7 @@ const CreateCatalogue = async (data, injection) => {
   return new CatalogueRepository(injection, CataloguePersistentModel)
     .create({
       ...data.catalogue,
-      store: data.catalogue.store,
+      store: UserLogged.stores[0].id,
       createdBy: UserLogged.id,
     })
     .then(catalogue => catalogue)
