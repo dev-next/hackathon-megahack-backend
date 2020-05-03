@@ -18,6 +18,13 @@ const typeDefs = gql`
     phones: [String]
   }
 
+  input StoreWhereInput {
+    name: String
+    email: String
+    documentNumber: String
+    phones: [String]
+  }
+
   type OpeningHours {
     weekDay: String
     range: RangeDate
