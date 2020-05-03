@@ -42,7 +42,7 @@ const resolvers = {
         db: { UserPersistentModel },
       }
     ) => {
-      if (root.requester) {
+      if (root.requester && !root.requester.id) {
         return FindUser({
           userId: root.requester,
         }, { UserLogged, UserPersistentModel });

@@ -45,7 +45,7 @@ const resolvers = {
         db: { ItemPersistentModel },
       }
     ) => {
-      if (root.items && root.items.length) {
+      if (root.items && root.items.length && !root.items[0].id) {
         return FindItems({
           where: {
             ids: root.items,
@@ -64,7 +64,7 @@ const resolvers = {
         db: { UserPersistentModel },
       }
     ) => {
-      if (root.seller) {
+      if (root.seller && root.seller.id) {
         return FindUser({
           userId: root.seller,
         }, { UserLogged, UserPersistentModel });
@@ -81,7 +81,7 @@ const resolvers = {
         db: { UserPersistentModel },
       }
     ) => {
-      if (root.customer) {
+      if (root.customer && !root.customer.id) {
         return FindUser({
           userId: root.customer,
         }, { UserLogged, UserPersistentModel });
@@ -98,7 +98,7 @@ const resolvers = {
         db: { StorePersistentModel },
       }
     ) => {
-      if (root.store) {
+      if (root.store && !root.store.id) {
         return FindStore({
           storeId: root.store,
         }, { UserLogged, StorePersistentModel });

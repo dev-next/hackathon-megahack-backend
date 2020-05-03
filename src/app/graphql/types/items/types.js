@@ -46,7 +46,7 @@ const resolvers = {
         db: { StorePersistentModel },
       }
     ) => {
-      if (root.store) {
+      if (root.store && !root.store.id) {
         return FindStore({
           storeId: root.store,
         }, { UserLogged, StorePersistentModel });
@@ -63,7 +63,7 @@ const resolvers = {
         db: { UserPersistentModel },
       }
     ) => {
-      if (root.createdBy) {
+      if (root.createdBy && !root.store.id) {
         return FindUser({
           userId: root.createdBy,
         }, { UserLogged, UserPersistentModel });

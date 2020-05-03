@@ -80,7 +80,7 @@ const resolvers = {
         db: { UserPersistentModel },
       }
     ) => {
-      if (root.fromUser) {
+      if (root.fromUser && !root.fromUser.id) {
         return FindUser({
           userId: root.fromUser,
         }, { UserLogged, UserPersistentModel });
@@ -101,7 +101,7 @@ const resolvers = {
         db: { StorePersistentModel },
       }
     ) => {
-      if (root.store) {
+      if (root.store && !root.store.id) {
         return FindStore({
           storeId: root.store,
         }, { UserLogged, StorePersistentModel });
@@ -118,7 +118,7 @@ const resolvers = {
         db: { UserPersistentModel },
       }
     ) => {
-      if (root.seller) {
+      if (root.seller && !root.seller.id) {
         return FindUser({
           userId: root.seller,
         }, { UserLogged, UserPersistentModel });
