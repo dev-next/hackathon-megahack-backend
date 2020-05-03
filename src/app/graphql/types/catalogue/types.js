@@ -1,5 +1,5 @@
 const { gql } = require('apollo-server-express');
-const FindItems = require('../../../domain/use-cases/user/find-items/FindItems');
+const FindItems = require('../../../domain/use-cases/user/find-item/FindItems');
 const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
 const typeDefs = gql`
