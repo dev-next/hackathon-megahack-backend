@@ -24,6 +24,7 @@ const MakeParams = async (data, injection) => {
 
   return {
     ...newData,
+    type: 'SELLER',
     active: true,
   };
 };
