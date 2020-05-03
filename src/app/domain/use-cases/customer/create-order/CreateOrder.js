@@ -51,37 +51,38 @@ const CreateOrder = async (data, injection) => {
           .findOne(catalogue.customer);
       }
 
+      const url = process.env.API_URL;
       await TwilioService.sms({
         body: `Olá, ${customer.name}!
-        Seu pedido na *Vitrine* da loja ${store.name} foi realizado com sucesso!
-        Em breve vamos te notificar a respeito do andamento do pedido. Até logo :)
-        Para acompanhar o pedido, acesse: ${process.env.API_UR}/v/${catalogue.slug}`,
+Seu pedido na Vitrine da loja ${store.name} foi realizado com sucesso.
+Em breve vamos te notificar a respeito do andamento do pedido.
+Para acompanhar o pedido, acesse: ${url.toString()}/v/${catalogue.slug}`,
         to: customer.phone,
       });
 
       await TwilioService.whatsapp({
         body: `Olá, ${customer.name}!
-        Seu pedido na *Vitrine* da loja ${store.name} foi realizado com sucesso!
-        Em breve vamos te notificar a respeito do andamento do pedido. Até logo :)
-        Para acompanhar o pedido, acesse: ${process.env.API_UR}/v/${catalogue.slug}`,
+Seu pedido na *Vitrine* da loja ${store.name} foi realizado com sucesso!
+Em breve vamos te notificar a respeito do andamento do pedido.
+Para acompanhar o pedido, acesse: ${url.toString()}/v/${catalogue.slug}`,
         to: customer.phone,
       });
 
       await TwilioService.sms({
         body: `Olá, ${seller.name}!
-        Há um novo pedido na plataforma :)
-        Cliente: *${customer.name}*
-        Telefone/Celular: *${customer.phone}*
-        Para acompanhar o pedido, acesse: ${process.env.API_UR}/listas/${catalogue.slug}`,
+Há um novo pedido na plataforma :)
+Cliente: ${customer.name}
+Telefone/Celular: ${customer.phone}
+Para acompanhar o pedido, acesse: ${url.toString()}/listas/${catalogue.slug}`,
         to: seller.phone,
       });
 
       await TwilioService.whatsapp({
         body: `Olá, ${seller.name}!
-        Há um novo pedido na plataforma :)
-        Cliente: *${customer.name}*
-        Telefone/Celular: *${customer.phone}*
-        Para acompanhar o pedido, acesse: ${process.env.API_UR}/listas/${catalogue.slug}`,
+Há um novo pedido na plataforma :)
+Cliente: *${customer.name}*
+Telefone/Celular: *${customer.phone}*
+Para acompanhar o pedido, acesse: ${url.toString()}/listas/${catalogue.slug}`,
         to: seller.phone,
       });
 
