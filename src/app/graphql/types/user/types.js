@@ -70,7 +70,7 @@ const resolvers = {
         db: { StorePersistentModel },
       }
     ) => {
-      if (root.stores && root.stores.length) {
+      if (root.stores && root.stores.length && !root.stores[0].id) {
         return FindStores({
           where: {
             ids: root.stores,
