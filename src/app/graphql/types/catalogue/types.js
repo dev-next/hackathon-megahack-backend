@@ -1,5 +1,6 @@
 const { gql } = require('apollo-server-express');
 const FindItems = require('../../../domain/use-cases/user/find-items/FindItems');
+const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
 const typeDefs = gql`
   type Catalogue {
@@ -35,7 +36,7 @@ const resolvers = {
   Catalogue: {
     id: root => root._id || root.id,
 
-    items: async (
+    items: (
       root,
       data,
       {
@@ -52,6 +53,23 @@ const resolvers = {
       }
 
       return [];
+    },
+
+    seller: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { UserPersistentModel },
+      }
+    ) => {
+      if (root.seller) {
+        return FindUser({
+          userId: root.seller,
+        }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
     },
   },
 };
