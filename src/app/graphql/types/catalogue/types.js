@@ -15,14 +15,14 @@ const typeDefs = gql`
   }
 
   input CatalogueInput {
+    name: String
+    slug: String
     seller: ID
     customer: ID
-    items: [ItemInput]
-    title: String
-    slug: String
+    items: [ID]
   }
 
-  input CatalogueWhere {
+  input CatalogueWhereInput {
     name: String
     seller: ID
     customer: ID
