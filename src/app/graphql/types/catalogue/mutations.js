@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql, UserInputError } = require('apollo-server-express');
 const CreateCatalogue = require('../../../domain/use-cases/user/create-catalogue/CreateCatalogue');
 
 const typeDefs = gql`
@@ -15,7 +15,10 @@ const resolvers = {
       root,
       data,
       {
-        db: { CataloguePersistentModel },
+        db: {
+          CataloguePersistentModel,
+          UserPersistentModel,
+        },
         UserLogged,
       },
     ) => {
@@ -25,7 +28,11 @@ const resolvers = {
         });
       }
 
-      return CreateCatalogue(data, { CataloguePersistentModel, UserLogged });
+      return CreateCatalogue(data, {
+        CataloguePersistentModel,
+        UserPersistentModel,
+        UserLogged,
+      });
     },
   },
 };
