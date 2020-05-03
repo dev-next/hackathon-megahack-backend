@@ -34,13 +34,17 @@ const CreateOrder = async (data, injection) => {
         .findOne(data.order.catalogue);
 
       let customer;
+
       if (!catalogue.customer) {
-        customer = await new UserRepository(injection, UserPersistentModel)
+        const user = await new UserRepository(injection, UserPersistentModel)
           .findOneByWhere({ phone: data.order.customer.phone });
 
-        if (!userFound) {
+        if (!user) {
           customer = await new UserRepository(injection, UserPersistentModel)
-            .create(data.user.customer);
+            .create(data.order.customer);
+          console.log('customer:', customer);
+        } else {
+          customer = user;
         }
       } else {
         customer = await new UserRepository(injection, UserPersistentModel)
