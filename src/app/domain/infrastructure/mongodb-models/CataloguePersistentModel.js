@@ -15,17 +15,7 @@ function GenerateCalalogueMongoSchema(injection) {
     seller: { type: Schema.Types.ObjectId, ref: 'users' },
     customer: { type: Schema.Types.ObjectId, ref: 'customer' },
     store: { type: Schema.Types.ObjectId, ref: 'stores' },
-    items: [{
-      name: { type: String, required: true },
-      description: String,
-      photos: [String],
-      value: Number,
-      tags: [String],
-      fields: [{
-        label: String,
-        value: String,
-      }],
-    }],
+    items: [{ type: Schema.Types.ObjectId, ref: 'items' }],
     createdBy: { type: Schema.Types.ObjectId, ref: 'users' },
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
