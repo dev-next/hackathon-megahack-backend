@@ -12,10 +12,16 @@ function GenerateCatalogueMongoSchema(injection) {
       lowercase: true,
       index: { unique: true },
     },
+    store: {
+      type: Schema.Types.ObjectId, ref: 'stores',
+      required: true,
+    },
+    items: [{
+      type: Schema.Types.ObjectId, ref: 'items',
+      required: true,
+    }],
     seller: { type: Schema.Types.ObjectId, ref: 'users' },
     customer: { type: Schema.Types.ObjectId, ref: 'customer' },
-    store: { type: Schema.Types.ObjectId, ref: 'stores' },
-    items: [{ type: Schema.Types.ObjectId, ref: 'items' }],
     createdBy: { type: Schema.Types.ObjectId, ref: 'users' },
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });

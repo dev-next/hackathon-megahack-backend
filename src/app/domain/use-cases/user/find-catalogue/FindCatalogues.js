@@ -4,7 +4,6 @@ const dependencies = {
 };
 
 const FindCatalogueBySlug = async (data, injection) => {
-  console.log(injection);
   const {
     CataloguePersistentModel,
     CatalogueRepository,
