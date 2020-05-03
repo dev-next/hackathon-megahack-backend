@@ -7,6 +7,7 @@ const { signTypeDefs, signResolvers } = require('./types/sign');
 const { itemTypeDefs, itemResolvers } = require('./types/items');
 const { storeTypeDefs, storeResolvers } = require('./types/store');
 const { commonTypeDefs, commonResolvers } = require('./types/common');
+const { catalogueTypeDefs, catalogueResolvers } = require('./types/catalogue');
 const { sysActionTypeDefs, sysActionResolvers } = require('./types/sysAction');
 
 // DEFAULT EMPTY ROOT TYPES
@@ -28,6 +29,7 @@ const typeDefs = flatten([
   itemTypeDefs,
   storeTypeDefs,
   commonTypeDefs,
+  catalogueTypeDefs,
   sysActionTypeDefs,
 ]);
 const resolvers = merge(
@@ -37,6 +39,7 @@ const resolvers = merge(
   itemResolvers,
   storeResolvers,
   commonResolvers,
+  catalogueResolvers,
   sysActionResolvers,
 );
 
