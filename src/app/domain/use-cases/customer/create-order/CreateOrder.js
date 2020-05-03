@@ -42,7 +42,6 @@ const CreateOrder = async (data, injection) => {
         if (!user) {
           customer = await new UserRepository(injection, UserPersistentModel)
             .create(data.order.customer);
-          console.log('customer:', customer);
         } else {
           customer = user;
         }

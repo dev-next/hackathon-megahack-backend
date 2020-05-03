@@ -10,10 +10,7 @@ class TwilioService {
       to: `+55${data.to}`,
       from: process.env.TWILIO_NUMBER_SMS,
     })
-      .then((message) => {
-        console.log(message);
-        return true;
-      })
+      .then(() => true)
       .catch(() => false);
   }
 
@@ -25,14 +22,8 @@ class TwilioService {
          to: `whatsapp:+55${data.to}`,
          from: `whatsapp:${process.env.TWILIO_NUMBER_WHATSAPP}`,
        })
-        .then((message) => {
-          console.log(message);
-          return true;
-        })
-        .catch((e) => {
-          console.log(e);
-          return false;
-        })
+        .then(() => true)
+        .catch(() => false)
         .done();
   }
 }
