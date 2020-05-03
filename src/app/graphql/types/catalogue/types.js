@@ -71,6 +71,23 @@ const resolvers = {
 
       return {};
     },
+
+    customer: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { UserPersistentModel },
+      }
+    ) => {
+      if (root.customer) {
+        return FindUser({
+          userId: root.customer,
+        }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
+    },
   },
 };
 
