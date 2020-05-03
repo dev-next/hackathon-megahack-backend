@@ -21,7 +21,7 @@ const FindSellers = async (data, injection) => {
   }
 
   try {
-    const params = await MakeParamsToFind(data.where);
+    const params = await MakeParamsToFind(data.where || {});
 
     return new UserRepository(injection, UserPersistentModel).find(params);
   } catch (e) {
