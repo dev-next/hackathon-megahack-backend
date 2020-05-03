@@ -3,7 +3,7 @@ function GenerateUsersMongoSchema(injection) {
     connection,
     Schema,
   } = Object.assign({}, injection);
-  const userMongoSchema = new Schema({
+  const sysActionMongoSchema = new Schema({
     requester: { type: Schema.Types.ObjectId, ref: 'users' },
     hash: { type: String, required: true },
     action: {
@@ -22,7 +22,7 @@ function GenerateUsersMongoSchema(injection) {
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
 
-  return connection.model('sysActions', userMongoSchema);
+  return connection.model('sysActions', sysActionMongoSchema);
 }
 
 module.exports = injection => GenerateUsersMongoSchema(injection);
