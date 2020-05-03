@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+const FindStores = require('../../../domain/use-cases/user/find-store/FindStores');
 
 const typeDefs = gql`
   enum _UserType {
@@ -60,6 +61,25 @@ const resolvers = {
   User: {
     // APPROACH TO TRANSFORM POSSIBLE _id RECEIVED FROM MONGODB DATABASE
     id: root => root._id || root.id,
+
+    stores: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { StorePersistentModel },
+      }
+    ) => {
+      if (root.stores && root.stores.length) {
+        return FindStores({
+          where: {
+            ids: root.stores,
+          },
+        }, { UserLogged, StorePersistentModel });
+      }
+
+      return [];
+    },
   },
 };
 
