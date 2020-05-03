@@ -1,4 +1,4 @@
-function GenerateCalalogueMongoSchema(injection) {
+function GenerateCatalogueMongoSchema(injection) {
   const {
     connection,
     Schema,
@@ -22,4 +22,4 @@ function GenerateCalalogueMongoSchema(injection) {
   return connection.model('catalogues', catalogueMongoSchema);
 }
 
-module.exports = injection => GenerateCalalogueMongoSchema(injection);
+module.exports = injection => GenerateCatalogueMongoSchema(injection);
