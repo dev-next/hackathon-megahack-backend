@@ -19,9 +19,9 @@ const CreateItem = async (data, injection) => {
 
   return new ItemRepository(injection, ItemPersistentModel)
     .create({
-      ...params.item,
-      store: params.store,
-      createdBy: params.createdBy,
+      ...data.item,
+      store: data.store,
+      createdBy: data.createdBy,
     })
     .then(item => item)
     .catch(() => new Error('Ops, houve um problema no cadastro do seu item.' +

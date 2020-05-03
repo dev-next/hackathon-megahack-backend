@@ -12,6 +12,8 @@ const typeDefs = gql`
     store: [Store]
     createdBy: User
     active: Boolean
+    creationDate: DateTime
+    updateDate: DateTime
   }
 
   input ItemInput {
