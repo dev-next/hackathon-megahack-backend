@@ -6,7 +6,11 @@ const typeDefs = gql`
     sendSms(
       body: String
       to: String
-      from: String
+    ): Boolean
+
+    sendWhatsapp(
+      body: String
+      to: String
     ): Boolean
   }
 `;
@@ -16,10 +20,12 @@ const resolvers = {
     sendSms: (
       root,
       data,
-      {
-        UserLogged,
-      },
-    ) => TwilioService.sms(data, { UserLogged }),
+    ) => TwilioService.sms(data),
+
+    sendWhatsapp: (
+      root,
+      data,
+    ) => TwilioService.whatsapp(data),
   },
 };
 

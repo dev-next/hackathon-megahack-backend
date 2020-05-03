@@ -1,29 +1,38 @@
-const internalDependencies = {
-  accountSid: process.env.TWILIO_ACCOUNT_SID,
-  authToken: process.env.TWILIO_AUTH_TOKEN,
-  twilio: require('twilio'),
-};
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilio = require('twilio');
+const client = new twilio(accountSid, authToken);
 
 class TwilioService {
-  static sms(data, externalDependencies) {
-    const {
-      accountSid,
-      authToken,
-      twilio,
-    } = Object.assign({}, internalDependencies, externalDependencies);
-
-    const client = new twilio(accountSid, authToken);
-
+  static sms(data) {
     client.messages.create({
       body: data.body,
-      to: data.to,
-      from: data.from,
+      to: `+55${data.to}`,
+      from: process.env.TWILIO_NUMBER_SMS,
     })
       .then((message) => {
         console.log(message);
         return true;
       })
       .catch(() => false);
+  }
+
+  static whatsapp(data) {
+    client.messages
+      .create({
+         body: data.body,
+         to: `whatsapp:+55${data.to}`,
+         from: `whatsapp:${process.env.TWILIO_NUMBER_WHATSAPP}`,
+       })
+        .then((message) => {
+          console.log(message);
+          return true;
+        })
+        .catch((e) => {
+          console.log(e);
+          return false;
+        })
+        .done();
   }
 }
 
