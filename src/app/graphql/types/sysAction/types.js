@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
 const typeDefs = gql`
   type SysAction {
@@ -32,6 +33,23 @@ const typeDefs = gql`
 const resolvers = {
   SysAction: {
     id: root => root._id || root.id,
+
+    requester: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { UserPersistentModel },
+      }
+    ) => {
+      if (root.requester) {
+        return FindUser({
+          userId: root.requester,
+        }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
+    },
   },
 };
 
