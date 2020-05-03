@@ -1,6 +1,13 @@
+const internalDependencies = {
+  mongoose: require('mongoose'),
+};
+
 const MakeParams = async (data, injection) => {
   let newData = Object.assign(data, {});
-  const { UserLogged } = injection;
+  const {
+    UserLogged,
+    mongoose,
+  } = Object.assign({}, internalDependencies, injection);
 
   if (data.name) {
     newData = {
@@ -20,7 +27,7 @@ const MakeParams = async (data, injection) => {
 
   return {
     ...newData,
-    store: { $in: UserLogged.stores.map(store => store.id.toString()) },
+    store: { $in: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)) },
     active: true,
   };
 };

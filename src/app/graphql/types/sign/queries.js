@@ -17,9 +17,13 @@ const resolvers = {
       root,
       data,
       {
-        db: { UserPersistentModel },
+        db: { UserPersistentModel, StorePersistentModel },
       },
-    ) => Authenticate.user(data, { UserPersistentModel, AuthenticationError }),
+    ) => Authenticate.user(data, {
+      StorePersistentModel,
+      UserPersistentModel,
+      AuthenticationError,
+    }),
   },
 };
 

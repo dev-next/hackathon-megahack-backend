@@ -1,6 +1,13 @@
+const internalDependencies = {
+  mongoose: require('mongoose'),
+};
+
 const MakeCatalogueParamsToFind = async (data, injection) => {
   let newData = Object.assign(data, {});
-  const { UserLogged } = injection;
+  const {
+    UserLogged,
+    mongoose,
+  } = Object.assign({}, internalDependencies, injection);
 
   if (data.name) {
     newData = {
@@ -19,20 +26,20 @@ const MakeCatalogueParamsToFind = async (data, injection) => {
   if (data.seller) {
     newData = {
       ...newData,
-      seller: data.seller.toString(),
+      seller: mongoose.Types.ObjectId(data.seller),
     };
   }
 
   if (data.customer) {
     newData = {
       ...newData,
-      customer: data.customer.toString(),
+      customer: mongoose.Types.ObjectId(data.customer),
     };
   }
 
   return {
     ...newData,
-    store: { $in: UserLogged.stores.map(store => store.id.toString()) },
+    store: { $in: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)) },
     active: true,
   };
 };
