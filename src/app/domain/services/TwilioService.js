@@ -11,7 +11,7 @@ class TwilioService {
       from: process.env.TWILIO_NUMBER_SMS,
     })
       .then(() => true)
-      .catch(() => false);
+      .catch((e) => new Error(e));
   }
 
   static whatsapp(data) {
@@ -23,7 +23,7 @@ class TwilioService {
          from: `whatsapp:${process.env.TWILIO_NUMBER_WHATSAPP}`,
        })
         .then(() => true)
-        .catch(() => false)
+        .catch((e) => new Error(e))
         .done();
   }
 }
