@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+const FindStore = require('../../../domain/use-cases/user/find-store/FindStore');
 const FindItems = require('../../../domain/use-cases/user/find-item/FindItems');
 const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
@@ -84,6 +85,23 @@ const resolvers = {
         return FindUser({
           userId: root.customer,
         }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
+    },
+
+    store: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { StorePersistentModel },
+      }
+    ) => {
+      if (root.store) {
+        return FindStore({
+          storeId: root.store,
+        }, { UserLogged, StorePersistentModel });
       }
 
       return {};
