@@ -1,5 +1,4 @@
 const { gql } = require('apollo-server-express');
-const mongoose = require('mongoose');
 const FindItems = require('../../../domain/use-cases/user/find-items/FindItems');
 
 const typeDefs = gql`
@@ -45,14 +44,11 @@ const resolvers = {
       }
     ) => {
       if (root.items && root.items.length) {
-        const a = await FindItems({
+        return FindItems({
           where: {
             ids: root.items,
           },
         }, { UserLogged, ItemPersistentModel });
-
-        console.log(a);
-        return a;
       }
 
       return [];
