@@ -58,7 +58,10 @@ class AuthenticateService {
             email: user.email,
             phone: user.phone,
             type: user.type,
-            stores: user.stores,
+            stores: stores.map(store => ({
+              name: store.name,
+              id: store._id,
+            })),
           }
         };
       } else {
