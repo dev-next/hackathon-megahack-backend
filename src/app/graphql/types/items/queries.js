@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
-const FindItem = require('../../../domain/use-cases/user/find-items/FindItem');
-const FindItems = require('../../../domain/use-cases/user/find-items/FindItems');
+const FindItem = require('../../../domain/use-cases/user/find-item/FindItem');
+const FindItems = require('../../../domain/use-cases/user/find-item/FindItems');
 
 const typeDefs = gql`
   extend type Query {
