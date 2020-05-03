@@ -15,8 +15,12 @@ const resolvers = {
       root,
       data,
       {
-        db: { OrderPersistentModel },
-        UserLogged,
+        db: {
+          UserPersistentModel,
+          OrderPersistentModel,
+          StorePersistentModel,
+          CataloguePersistentModel,
+        },
       },
     ) => {
       if (!data.order) {
@@ -25,7 +29,12 @@ const resolvers = {
         });
       }
 
-      return CreateOrder(data, { OrderPersistentModel, UserLogged });
+      return CreateOrder(data, {
+        UserPersistentModel,
+        OrderPersistentModel,
+        StorePersistentModel,
+        CataloguePersistentModel,
+      });
     },
   },
 };

@@ -53,12 +53,12 @@ function GenerateOrdersMongoSchema(injection) {
       }],
     }],
     customer: {
-      fromUser: {type: Schema.Types.ObjectId, ref: 'users'},
       name: String,
       email: String,
       phone: String,
       tags: [String],
     },
+    catalogue: { type: Schema.Types.ObjectId, ref: 'catalogues' },
     seller: { type: Schema.Types.ObjectId, ref: 'users' },
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });

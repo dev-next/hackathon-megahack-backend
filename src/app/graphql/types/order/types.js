@@ -28,6 +28,7 @@ const typeDefs = gql`
     items: OrderItemsInput
     customer: OrderUserInput
     seller: ID
+    catalogue: ID
   }
 
   type OrderUser {
@@ -39,7 +40,6 @@ const typeDefs = gql`
   }
 
   input OrderUserInput {
-    fromUser: ID
     name: String
     email: String
     phone: String
