@@ -1,4 +1,6 @@
 const { gql } = require('apollo-server-express');
+const FindStore = require('../../../domain/use-cases/user/find-store/FindStore');
+const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
 
 const typeDefs = gql`
   type Item {
@@ -35,6 +37,40 @@ const typeDefs = gql`
 const resolvers = {
   Item: {
     id: root => root._id || root.id,
+
+    store: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { StorePersistentModel },
+      }
+    ) => {
+      if (root.store) {
+        return FindStore({
+          storeId: root.store,
+        }, { UserLogged, StorePersistentModel });
+      }
+
+      return {};
+    },
+
+    createdBy: (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { UserPersistentModel },
+      }
+    ) => {
+      if (root.createdBy) {
+        return FindUser({
+          userId: root.createdBy,
+        }, { UserLogged, UserPersistentModel });
+      }
+
+      return {};
+    },
   },
 };
 
