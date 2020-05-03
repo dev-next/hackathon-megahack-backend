@@ -9,6 +9,8 @@ const typeDefs = gql`
     value: Float
     tags: [String]
     fields: [Field]
+    store: [Store]
+    createdBy: User
     active: Boolean
   }
 

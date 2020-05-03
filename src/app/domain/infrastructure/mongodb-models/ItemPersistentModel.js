@@ -13,6 +13,8 @@ function GenerateItemsMongoSchema(injection) {
       label: String,
       value: String,
     }],
+    store: { type: Schema.Types.ObjectId, ref: 'stores' },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'users' },
     active: { type: Boolean, default: true },
   }, { timestamps: { createdAt: 'creationDate', updatedAt: 'updateDate' } });
   return connection.model('items', storeMongoSchema);
