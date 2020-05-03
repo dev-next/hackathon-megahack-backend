@@ -1,4 +1,6 @@
 const { gql } = require('apollo-server-express');
+const mongoose = require('mongoose');
+const FindItems = require('../../../domain/use-cases/user/find-items/FindItems');
 
 const typeDefs = gql`
   type Catalogue {
@@ -33,7 +35,29 @@ const typeDefs = gql`
 const resolvers = {
   Catalogue: {
     id: root => root._id || root.id,
-  }
+
+    items: async (
+      root,
+      data,
+      {
+        UserLogged,
+        db: { ItemPersistentModel },
+      }
+    ) => {
+      if (root.items && root.items.length) {
+        const a = await FindItems({
+          where: {
+            ids: root.items,
+          },
+        }, { UserLogged, ItemPersistentModel });
+
+        console.log(a);
+        return a;
+      }
+
+      return [];
+    },
+  },
 };
 
 module.exports = {

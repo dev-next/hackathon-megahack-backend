@@ -19,7 +19,7 @@ const FindItems = async (data, injection) => {
     throw new Error('Você não tem permissão para acessar este recurso');
   }
 
-  const params = data.where ? await MakeParamsToFind(data.where, UserLogged) : { active: true };
+  const params = data.where ? await MakeParamsToFind(data.where, { UserLogged }) : { active: true };
 
   return new ItemRepository(injection, ItemPersistentModel)
     .find(params)
