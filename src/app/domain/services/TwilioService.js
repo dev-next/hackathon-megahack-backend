@@ -1,10 +1,10 @@
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilio = require('twilio');
-const client = new twilio(accountSid, authToken);
 
 class TwilioService {
   static sms(data) {
+    const client = new twilio(accountSid, authToken);
     client.messages.create({
       body: data.body,
       to: `+55${data.to}`,
@@ -18,6 +18,7 @@ class TwilioService {
   }
 
   static whatsapp(data) {
+    const client = new twilio(accountSid, authToken);
     client.messages
       .create({
          body: data.body,
