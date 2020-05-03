@@ -44,6 +44,47 @@ const typeDefs = gql`
     label: String
     value: String
   }
+
+  type Payment {
+    method: _PaymentMethodEnum
+    needChange: Boolean
+  }
+
+  input PaymentInput {
+    method: _PaymentMethodEnum
+    needChange: Boolean
+  }
+
+  enum _PaymentMethodEnum {
+    MONEY
+    CREDIT_CARD
+  }
+
+  type Delivery {
+    location: Location
+    type: _DeliveryTypeEnum
+    dates: DateTime
+    period: _DeliveryPeriodEnum
+    shipment: Float
+  }
+
+  input DeliveryInput {
+    location: LocationInput
+    type: _DeliveryTypeEnum
+    dates: String
+    period: _DeliveryPeriodEnum
+    shipment: Float
+  }
+
+  enum _DeliveryTypeEnum {
+    HOME
+    STORE
+  }
+
+  enum _DeliveryPeriodEnum {
+    MORNING
+    AFTERNOON
+  }
 `;
 
 const resolvers = {

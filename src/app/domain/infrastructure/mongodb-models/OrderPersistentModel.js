@@ -24,7 +24,7 @@ function GenerateOrdersMongoSchema(injection) {
         enum: ['HOME', 'STORE'],
       },
       dates: Date,
-      hours: [{
+      period: [{
         type: String,
         uppercase: true,
         default: 'MORNING',
@@ -42,6 +42,7 @@ function GenerateOrdersMongoSchema(injection) {
       needChange: Boolean,
     },
     items: [{
+      fromItem: { type: Schema.Types.ObjectId, ref: 'items' },
       name: String,
       value: Number,
       description: String,
