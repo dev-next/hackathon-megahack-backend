@@ -19,7 +19,7 @@ const FindCatalogueBySlug = async (data, injection) => {
     throw new Error('Você não tem permissão para acessar este recurso');
   }
 
-  const newData = Object.assign(data.where, {});
+  const newData = Object.assign(data.where || {}, {});
   const params = await MakeParams(newData, { UserLogged });
 
   return new CatalogueRepository(injection, CataloguePersistentModel)
