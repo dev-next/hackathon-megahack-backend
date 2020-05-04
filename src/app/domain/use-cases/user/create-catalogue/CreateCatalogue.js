@@ -33,6 +33,7 @@ const CreateCatalogue = async (data, injection) => {
         const customer = await new UserRepository(injection, UserPersistentModel)
           .findOne(catalogue.customer._id);
 
+        const url = process.env.API_URL;
         await TwilioService.sms({
           body: `Oi ${customer.name}, nós da ${UserLogged.stores[0].name} criamos uma lista personalizada para você!
 Vem conferir: ${url.toString()}/v/${catalogue.slug}
@@ -42,7 +43,7 @@ Ah, se não conseguir clicar no link, copie e cole no seu navegador`,
 
         await TwilioService.whatsapp({
           body: `Oi ${customer.name}, nós da *${UserLogged.stores[0].name}* criamos uma lista personalizada para você!
-Vem conferir: ${url.toString()}/v/${catalogue.slug}
+Vem conferir: example.com/v/${catalogue.slug}
 Ah, se não conseguir clicar no link, copie e cole no seu navegador`,
           to: customer.phone,
         });
