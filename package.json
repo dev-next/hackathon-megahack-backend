@@ -1,0 +1,62 @@
+{
+  "name": "peralta-api",
+  "version": "1.0.0",
+  "description": "API GraphQL from http://peralta.dev-next.com",
+  "main": "server.js",
+  "dependencies": {
+    "apollo-engine": "^1.1.2",
+    "apollo-server-express": "^2.12.0",
+    "aws-sdk": "^2.667.0",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "date-fns": "^2.12.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "graphql": "^15.0.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-subscriptions": "^1.1.0",
+    "graphql-tools": "^5.0.0",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.25.1",
+    "mongoose": "^5.9.11",
+    "twilio": "^3.43.0",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "export NODE_ENV=dev && nodemon src/app/server.js",
+    "production": "export NODE_ENV=prod && nodemon src/app/server.js",
+    "lint": "./node_modules/.bin/eslint ./src/app/**/*.js",
+    "precommit": "npm run lint",
+    "prepush": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-next/hackathon-megahack-backend.git"
+  },
+  "keywords": [
+    "graphql",
+    "hackathon",
+    "megahack",
+    "mega",
+    "hack",
+    "javascript",
+    "node"
+  ],
+  "author": "andre000 | andre@dev-next.com, HelenDias | helen@dev-next.com",
+  "license": "Copyright 2020 Dev-Next",
+  "homepage": "https://github.com/dev-next"
+}
