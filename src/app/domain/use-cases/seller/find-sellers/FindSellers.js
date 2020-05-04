@@ -7,18 +7,8 @@ const FindSellers = async (data, injection) => {
   const {
     UserPersistentModel,
     MakeParamsToFind,
-    ForbiddenError,
     UserRepository,
-    UserLogged,
   } = Object.assign({}, dependencies, injection);
-
-  if (!UserLogged) {
-    throw new ForbiddenError('Você não está logado na plataforma. Por favor, faça login e tente novamente');
-  }
-
-  if (UserLogged.type !== 'STORE_OWNER') {
-    throw new Error('Você não tem permissão para acessar este recurso');
-  }
 
   try {
     const params = await MakeParamsToFind(data.where || {});

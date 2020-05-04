@@ -1,4 +1,4 @@
-const { gql, ForbiddenError } = require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 const FindSellers = require('../../../domain/use-cases/seller/find-sellers/FindSellers');
 const FindUsers = require('../../../domain/use-cases/user/find-user/FindUsers');
 const FindUser = require('../../../domain/use-cases/user/find-user/FindUser');
@@ -31,7 +31,6 @@ const resolvers = {
       },
     ) => FindSellers(data, {
       UserPersistentModel,
-      ForbiddenError,
       UserLogged,
     }),
 
@@ -44,7 +43,6 @@ const resolvers = {
       },
     ) => FindUser(data, {
       UserPersistentModel,
-      ForbiddenError,
       UserLogged,
     }),
 
@@ -57,7 +55,6 @@ const resolvers = {
       },
     ) => FindUsers(data, {
       UserPersistentModel,
-      ForbiddenError,
       UserLogged,
     }),
   },

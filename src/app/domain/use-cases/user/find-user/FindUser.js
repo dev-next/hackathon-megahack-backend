@@ -5,18 +5,9 @@ const dependencies = {
 const FindUser = async (data, injection) => {
   const {
     UserPersistentModel,
-    ForbiddenError,
     UserRepository,
     UserLogged,
   } = Object.assign({}, dependencies, injection);
-
-  if (!UserLogged) {
-    throw new ForbiddenError('Você não está logado na plataforma. Por favor, faça login e tente novamente');
-  }
-
-  if (UserLogged.type !== 'STORE_OWNER' && UserLogged.type !== 'SELLER') {
-    throw new Error('Você não tem permissão para acessar este recurso');
-  }
 
   if (!data.userId) {
     throw new Error('Por favor, selecione qual usuário gostaria de ver as informações');
