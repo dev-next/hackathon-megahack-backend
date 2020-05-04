@@ -36,14 +36,14 @@ const CreateCatalogue = async (data, injection) => {
         const url = process.env.API_URL;
         await TwilioService.sms({
           body: `Oi ${customer.name}, nós da ${UserLogged.stores[0].name} criamos uma lista personalizada para você!
-Vem conferir: ${url.toString()}/v/${catalogue.slug}
+Vem conferir: http://vitrine.dev-next.com/v/${catalogue.slug}
 Ah, se não conseguir clicar no link, copie e cole no seu navegador`,
           to: customer.phone,
         });
 
         await TwilioService.whatsapp({
           body: `Oi ${customer.name}, nós da *${UserLogged.stores[0].name}* criamos uma lista personalizada para você!
-Vem conferir: example.com/v/${catalogue.slug}
+Vem conferir: http://vitrine.dev-next.com/v/${catalogue.slug}
 Ah, se não conseguir clicar no link, copie e cole no seu navegador`,
           to: customer.phone,
         });
