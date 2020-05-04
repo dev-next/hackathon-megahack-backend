@@ -19,7 +19,7 @@ const MakeCatalogueParamsToFind = async (data, injection) => {
   if (data.slug) {
     newData = {
       ...newData,
-      slug: { $regex: `${data.slug}`, $options: 'i' },
+      slug: data.slug,
     };
   }
 
