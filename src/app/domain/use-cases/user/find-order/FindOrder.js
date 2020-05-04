@@ -11,10 +11,6 @@ const FindOrders = async (data, injection) => {
     UserLogged,
   } = Object.assign({}, dependencies, injection);
 
-  if (!UserLogged) {
-    throw new Error('Você não está logado na plataforma. Por favor, faça login e tente novamente');
-  }
-
   const params = data.where ? await MakeParamsToFind(data.where, { UserLogged }) : { active: true };
 
   return new OrderRepository(injection, OrderPersistentModel)
