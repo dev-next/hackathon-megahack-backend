@@ -7,7 +7,7 @@ class TwilioService {
     const client = new twilio(accountSid, authToken);
     client.messages.create({
       body: data.body,
-      to: `+55${data.to}`,
+      to: '+5514988014891',
       from: process.env.TWILIO_NUMBER_SMS,
     })
       .then(() => true)
@@ -19,7 +19,7 @@ class TwilioService {
     client.messages
       .create({
          body: data.body,
-         to: `whatsapp:+55${data.to}`,
+         to: 'whatsapp:+5514988014891',
          from: `whatsapp:${process.env.TWILIO_NUMBER_WHATSAPP}`,
        })
         .then(() => true)
