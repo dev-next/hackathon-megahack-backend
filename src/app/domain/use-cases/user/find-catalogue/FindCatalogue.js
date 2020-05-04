@@ -9,14 +9,6 @@ const FindCatalogueBySlug = async (data, injection) => {
     UserLogged,
   } = Object.assign({}, dependencies, injection);
 
-  if (!UserLogged) {
-    throw new Error('Você não está logado na plataforma. Por favor, faça login e tente novamente');
-  }
-
-  if (UserLogged.type !== 'STORE_OWNER' && UserLogged.type !== 'SELLER') {
-    throw new Error('Você não tem permissão para acessar este recurso');
-  }
-
   return new CatalogueRepository(injection, CataloguePersistentModel)
     .findOne(data.catalogueId)
     .then(catalogue => catalogue)
