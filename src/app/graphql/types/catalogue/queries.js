@@ -16,6 +16,8 @@ const typeDefs = gql`
     catalogueBySlug(
       slug: String!
     ): Catalogue
+
+    validateSlug(slug: String!): Boolean
   }
 `;
 
@@ -56,6 +58,18 @@ const resolvers = {
       CataloguePersistentModel,
       UserLogged,
     }),
+
+    validateSlug: async (
+      root,
+      data,
+      {
+        db: { CataloguePersistentModel },
+        UserLogged,
+      },
+    ) => {
+      const slug = await FindCatalogueBySlug(data, { CataloguePersistentModel, UserLogged });
+      return !slug;
+    },
   },
 };
 
