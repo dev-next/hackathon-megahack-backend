@@ -11,6 +11,8 @@ const typeDefs = gql`
     item(
       itemId: ID!
     ): Item
+
+    tags: [String]
   }
 `;
 
@@ -39,6 +41,14 @@ const resolvers = {
       ItemPersistentModel,
       UserLogged,
     }),
+
+    tags: (
+      root,
+      data,
+      {
+        db: { ItemPersistentModel },
+      },
+    ) => ItemPersistentModel.find().distinct('tags'),
   },
 };
 
