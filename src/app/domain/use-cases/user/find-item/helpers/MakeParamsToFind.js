@@ -5,7 +5,6 @@ const internalDependencies = {
 
 const MakeParams = async (data, injection) => {
   const {
-    UserLogged,
     mongoose,
     omit,
   } = Object.assign({}, internalDependencies, injection);
@@ -37,7 +36,6 @@ const MakeParams = async (data, injection) => {
 
   return {
     ...newData,
-    store: { $in: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)) },
     active: true,
   };
 };

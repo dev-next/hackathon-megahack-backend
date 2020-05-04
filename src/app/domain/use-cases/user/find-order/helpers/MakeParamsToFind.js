@@ -33,7 +33,6 @@ const MakeParams = async (data, injection) => {
 
   return {
     ...newData,
-    store: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)),
     active: true,
   };
 };

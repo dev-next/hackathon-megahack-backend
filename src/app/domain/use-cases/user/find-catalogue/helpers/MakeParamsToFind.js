@@ -39,7 +39,6 @@ const MakeCatalogueParamsToFind = async (data, injection) => {
 
   return {
     ...newData,
-    store: { $in: UserLogged.stores.map(store => mongoose.Types.ObjectId(store.id)) },
     active: true,
   };
 };
